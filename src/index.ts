@@ -2,7 +2,7 @@ import { renderHtml } from "./renderHtml";
 
 export default {
   async fetch(request, env) {
-    const stmt = env.DB.prepare("SELECT * FROM comments LIMIT 10");
+    const stmt = env.DB.prepare("SELECT * FROM user_provided_data LIMIT 10");
     const { results } = await stmt.all();
 
     return new Response(renderHtml(JSON.stringify(results, null, 2)), {
