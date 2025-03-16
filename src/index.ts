@@ -7,7 +7,7 @@ export default {
   
     const { sqlResult } = await env.DB.prepare(indexQuery).all();
     
-    const { entries } = Object.entries(sqlResult);
+    const { entries } = Object.entries(sqlResult[0]);
     console.log("entries: ", entries);
 
     console.log("sqlResult: ", sqlResult[0]);
