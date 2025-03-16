@@ -10,10 +10,10 @@ export default {
     const { entries } = Object.entries(sqlResult);
     console.log("entries: ", entries);
 
-    console.log("sqlResult: ", sqlResult);
-    console.log("sqlResult type: ", typeof sqlResult);
+    console.log("sqlResult: ", sqlResult[0]);
+    console.log("sqlResult type: ", typeof sqlResult[0]);
 
-    let currentIndex = await sqlResult;
+    let currentIndex = await sqlResult[0];
 
     console.log("currentIndex is: ", currentIndex);
 
