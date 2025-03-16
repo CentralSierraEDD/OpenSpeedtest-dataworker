@@ -2,7 +2,7 @@ export function renderHtml(content: string) {
   return `
     <!DOCTYPE html>
     <html lang="en">
-      <title>S#008: D1 page</title>
+      <title>S#009: D1 page</title>
       <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,7 +19,7 @@ export function renderHtml(content: string) {
         </header>
         <main>
           <p>Your D1 Database contains the following data:</p>
-          <pre><code><span style="color: #0E838F">&gt; </span>SELECT * FROM dataTable LIMIT 10;<br>${content}</code></pre>
+          <pre><code><span style="color: #0E838F">&gt; </span>SELECT * FROM data_table LIMIT 10;<br>${content}</code></pre>
           <small class="blue">
             <a target="_blank" href="https://developers.cloudflare.com/d1/tutorials/build-a-comments-api/">Build a comments API with Workers and D1</a>
           </small>
