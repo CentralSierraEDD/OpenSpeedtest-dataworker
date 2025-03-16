@@ -8,10 +8,7 @@ let createQuery = `INSERT INTO user_provided_data (Test_Index) VALUES (?)`;
 
 export default {
   async fetch(request, env) {
-    env.DB.query(createQuery).bind(newIndex)
-  },
-
-  async fetch(request, env) {
+    env.DB.query(createQuery).bind(newIndex);
     const stmt = env.DB.prepare("SELECT * FROM user_provided_data LIMIT 10");
     const { results } = await stmt.all();
 
