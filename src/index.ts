@@ -13,7 +13,7 @@ export default {
     console.log("sqlResult: ", sqlResult);
     console.log("sqlResult type: ", typeof sqlResult);
 
-    let currentIndex = sqlResult;
+    let currentIndex = await sqlResult;
 
     console.log("currentIndex is: ", currentIndex);
 
