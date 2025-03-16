@@ -2,7 +2,7 @@ import { renderHtml } from "./renderHtml";
 
 export default {
   async fetch(request, env) {
-    let indexQuery = `SELECT indexnum FROM data_table WHERE indexnum = (SELECT MAX(indexnum) FROM data_table);`;
+    let indexQuery = `SELECT * FROM data_table WHERE indexnum = (SELECT MAX(indexnum) FROM data_table);`;
     let createQuery = `INSERT INTO data_table (indexnum) VALUES (?);`;
     let displayQuery = `SELECT * FROM data_table LIMIT 10;`;
     
