@@ -9,7 +9,7 @@ export default {
     const stmt3 = env.DB.prepare(indexQuery);
     
     
-    let { maxIndex } = await stmt3.all();
+    let { maxIndex } = JSON.stringify(await stmt3.all());
     
     console.log("stmt3: ", stmt3);
     console.log("results type: ", typeof maxIndex)
