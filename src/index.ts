@@ -72,7 +72,7 @@ export default {
       let curField = "testnum";
       let curData = 0;
 
-      await env.DB.prepare(recordQuery).bind(curField).bind(curData).bind(curRow).run();
+      await env.DB.prepare(recordQuery).bind(curField, curData, curRow).run();
 
       console.log("Iteration:", i);
       i++;
