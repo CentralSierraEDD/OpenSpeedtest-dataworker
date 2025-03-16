@@ -6,22 +6,20 @@ export default {
     let createQuery = `INSERT INTO data_table (indexnum) VALUES (?);`;
   
     const stmt3 = await env.DB.prepare(indexQuery);
-    const { results3 } = stmt3;
+    const { results3 } = await stmt3.all();
   
     console.log("results3: ", results3);
     console.log("results3 type: ", typeof results3);
   
-    let newIndex = JSON.stringify(results3) + 1;
+    let newIndex = await (JSON.stringify(results3) + 1);
   
     console.log("newIndex is: ", newIndex);
   
-    const stmt2 = await env.DB.prepare(createQuery).bind(newIndex);
-    const { results2 } = stmt2;
+    env.DB.prepare(createQuery).bind(newIndex);
     
     let displayQuery = `SELECT * FROM data_table LIMIT 10;`;
-    
-    const stmt = await env.DB.prepare(displayQuery);
-    const { results } = stmt;
+    const stmt = env.DB.prepare(displayQuery);
+    const { results } = await stmt.all();
 
     return new Response(renderHtml(JSON.stringify(results, null, 2)), {
       headers: {
