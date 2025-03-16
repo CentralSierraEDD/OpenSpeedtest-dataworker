@@ -2,8 +2,8 @@ import { renderHtml } from "./renderHtml";
 
 export default {
   async fetch(request, env) {
-    let indexQuery = `"SELECT indexnum FROM data_table WHERE indexnum = (SELECT MAX(indexnum) FROM data_table);"`;
-    let createQuery = `"INSERT INTO data_table (indexnum) VALUES (?);"`;
+    let indexQuery = `SELECT indexnum FROM data_table WHERE indexnum = (SELECT MAX(indexnum) FROM data_table);`;
+    let createQuery = `INSERT INTO data_table (indexnum) VALUES (?);`;
     const stmt3 = env.DB.prepare(indexQuery);
     let results3 = await stmt3.all();
     let maxIndex = results3;
