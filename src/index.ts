@@ -8,8 +8,13 @@ export default {
     console.log("indexing query: ", indexQuery);
     console.log("record create query: ", createQuery);
     
-    let maxIndex = env.DB.prepare(indexQuery);
+    const stmt3 = env.DB.prepare(indexQuery);
+    const { results3 } = await stmt3.all();
     
+    console.log("results of query: ", results3);
+
+    let maxIndex = results3;
+
     console.log("maxIndex is: ", maxIndex);
     
     let newIndex = maxIndex++;
