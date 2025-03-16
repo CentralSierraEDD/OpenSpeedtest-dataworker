@@ -5,20 +5,12 @@ export default {
     let indexQuery = `SELECT indexnum FROM data_table WHERE indexnum = (SELECT MAX(indexnum) FROM data_table);`;
     let createQuery = `INSERT INTO data_table (indexnum) VALUES (?);`;
     let displayQuery = `SELECT * FROM data_table LIMIT 10;`;
-
-    console.log("indexing query: ", indexQuery);
-    console.log("record create query: ", createQuery);
-    console.log("display query is: ", displayQuery);
     
     const stmt3 = env.DB.prepare(indexQuery);
-    const { results3 } = await stmt3.all();
+    const { maxIndex } = await stmt3.all();
     
-    console.log("results type: ", typeof results3)
-    console.log("results of query: ", results3);
-
-    let maxIndex = results3;
-
-    console.log("maxIndex is: ", maxIndex);
+    console.log("results type: ", typeof maxIndex)
+    console.log("results of query: ", maxIndex);
     
     let newIndex = maxIndex++;
     
