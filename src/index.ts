@@ -19,10 +19,10 @@ export default {
     console.log("newIndex is: ", newIndex);
 
     const stmt2 = env.DB.prepare(createQuery).bind(newIndex);
-    const { results2 } = await stmt2.all();
+    const { results2 } = stmt2.all();
 
     const stmt = env.DB.prepare(displayQuery);
-    const { results } = await stmt.all();
+    const { results } = stmt.all();
 
     return new Response(renderHtml(JSON.stringify(results, null, 2)), {
       headers: {
