@@ -11,8 +11,8 @@ export default {
 
     let maxIndex = await JSON.stringify(results3);
 
-    console.log("results3: ", results3);
-    console.log("results3 type: ", typeof results3);
+    await console.log("results3: ", results3);
+    await console.log("results3 type: ", typeof results3);
     
     let newIndex = maxIndex + 1;
     
