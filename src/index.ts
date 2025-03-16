@@ -2,13 +2,13 @@ import { renderHtml } from "./renderHtml";
 
 export default {
   async fetch(request, env) {
-    let indexQuery = `SELECT * FROM user_provided_data WHERE Test_Index = (SELECT MAX(Test_Index) FROM user_provided_data)`;
-    let createQuery = `INSERT INTO user_provided_data (Test_Index) VALUES (?)`;
+    let indexQuery = `SELECT * FROM dataTable WHERE index = (SELECT MAX(index) FROM dataTable)`;
+    let createQuery = `INSERT INTO dataTable (index) VALUES (?)`;
     let maxIndex = env.DB.prepare(indexQuery);
     let newIndex = maxIndex++;
     const stmt2 = env.DB.prepare(createQuery).bind(newIndex);
     const { results2 } = await stmt2.all();
-    const stmt = env.DB.prepare("SELECT * FROM user_provided_data LIMIT 10");
+    const stmt = env.DB.prepare("SELECT * FROM dataTable LIMIT 10");
     const { results } = await stmt.all();
 
     return new Response(renderHtml(JSON.stringify(results, null, 2)), {
