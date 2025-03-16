@@ -1,7 +1,7 @@
 import { renderHtml } from "./renderHtml";
 
 let indexQuery = `SELECT * FROM user_provided_data WHERE Test_Index = (SELECT MAX(Test_Index) FROM user_provided_data)`;
-let maxIndex = env.DB.query(indexQuery);
+let maxIndex = DB.query(indexQuery);
 let newIndex = maxIndex++;
 let createQuery = `INSERT INTO user_provided_data (Test_Index) VALUES (?)`;
 
