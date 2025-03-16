@@ -8,12 +8,7 @@ export default {
     console.log("indexing query: ", indexQuery);
     console.log("record create query: ", createQuery);
     
-    const stmt3 = env.DB.prepare(indexQuery);
-    let { results3 } = await stmt3.all();
-    
-    console.log("results are:", results3);
-    
-    let maxIndex = results3;
+    let maxIndex = env.DB.prepare(indexQuery);
     
     console.log("maxIndex is: ", maxIndex);
     
@@ -23,6 +18,7 @@ export default {
     
     const stmt2 = env.DB.prepare(createQuery).bind(newIndex);
     const { results2 } = await stmt2.all();
+    
     const stmt = env.DB.prepare("SELECT * FROM data_table LIMIT 10");
     const { results } = await stmt.all();
 
