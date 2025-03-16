@@ -7,7 +7,7 @@ export default {
     let maxIndex = env.DB.prepare(indexQuery);
     let newIndex = maxIndex++;
     const stmt2 = env.DB.prepare(createQuery).bind(newIndex);
-    const { results } = await stmt2.all();
+    const { results2 } = await stmt2.all();
     const stmt = env.DB.prepare("SELECT * FROM user_provided_data LIMIT 10");
     const { results } = await stmt.all();
 
