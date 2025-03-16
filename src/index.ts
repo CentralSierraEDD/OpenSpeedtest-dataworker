@@ -54,7 +54,7 @@ export default {
   async fetch(request, env) {
     let indexQuery = `SELECT MAX(indexnum) AS maxIndex FROM data_table;`;
     let createQuery = `INSERT INTO data_table (indexnum) VALUES (?);`;
-    let recordQuery = `UPDATE data_table SET ?? = ? WHERE indexnum = ?;`;
+    let recordQuery = `UPDATE data_table SET ? WHERE indexnum = ?;`;
   
     const { results: indexResults } = await env.DB.prepare(indexQuery).all();
     
@@ -68,11 +68,12 @@ export default {
     
     let i: number = 0;
     while (i < 5) {
-      let curRow = 5;
+      let curRow = 3;
       let curField = "testnum";
       let curData = 0;
+      let setData = curField + " = " curData;
 
-      await env.DB.prepare(recordQuery).bind(curField, curData, curRow).run();
+      await env.DB.prepare(recordQuery).bind(setData, curRow).run();
 
       console.log("Iteration:", i);
       i++;
