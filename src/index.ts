@@ -69,8 +69,8 @@ export default {
     let i: number = 0;
     while (i < 5) {
       let curRow = 5;
-      let curField = sqlFields[i];
-      let curData = dummyData[i];
+      let curField = "testnum";
+      let curData = 0;
 
       await env.DB.prepare(recordQuery).bind(curField).bind(curData).bind(curRow).run();
 
