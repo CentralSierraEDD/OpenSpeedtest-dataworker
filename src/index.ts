@@ -7,22 +7,20 @@ export default {
     let displayQuery = `SELECT * FROM data_table LIMIT 10;`;
 
     const stmt3 = env.DB.prepare(indexQuery);
-    const { results3 } = stmt3.all();
+    const { results3 } = await stmt3.all();
 
-    let maxIndex = JSON.stringify(results3);
+    console.log("results3: ", await results3);
+    console.log("results3 type: ", typeof await results3);
 
-    console.log("results3: ", results3);
-    console.log("results3 type: ", typeof results3);
-    
-    let newIndex = maxIndex + 1;
-    
-    console.log("newIndex is: ", newIndex);
+    let newIndex = JSON.stringify(results3) + 1;
+
+    console.log("newIndex is: ", await newIndex);
 
     const stmt2 = env.DB.prepare(createQuery).bind(newIndex);
-    const { results2 } = stmt2.all();
+    const { results2 } = await stmt2.all();
 
     const stmt = env.DB.prepare(displayQuery);
-    const { results } = stmt.all();
+    const { results } = await stmt.all();
 
     return new Response(renderHtml(JSON.stringify(results, null, 2)), {
       headers: {
