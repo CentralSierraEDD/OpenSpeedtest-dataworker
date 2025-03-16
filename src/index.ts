@@ -5,7 +5,7 @@ export default {
     let indexQuery = `SELECT indexnum FROM data_table WHERE indexnum = (SELECT MAX(indexnum) FROM data_table);`;
     let createQuery = `INSERT INTO data_table (indexnum) VALUES (?);`;
   
-    let sqlResult = await JSON.stringify(env.DB.prepare(indexQuery).all());
+    let { sqlResult } = await JSON.stringify(env.DB.prepare(indexQuery).all());
 
     console.log("sqlResult: ", sqlResult[0]);
     console.log("sqlResult type: ", typeof sqlResult);
