@@ -5,14 +5,14 @@ export default {
     let indexQuery = `SELECT indexnum FROM data_table WHERE indexnum = (SELECT MAX(indexnum) FROM data_table);`;
     let createQuery = `INSERT INTO data_table (indexnum) VALUES (?);`;
     let displayQuery = `SELECT * FROM data_table LIMIT 10;`;
-    
+
     const stmt3 = env.DB.prepare(indexQuery);
-    const { results3 } = await stmt3.all();
+    const { results3 } = stmt3.all();
 
-    let maxIndex = await JSON.stringify(results3);
+    let maxIndex = JSON.stringify(results3);
 
-    await console.log("results3: ", results3);
-    await console.log("results3 type: ", typeof results3);
+    console.log("results3: ", results3);
+    console.log("results3 type: ", typeof results3);
     
     let newIndex = maxIndex + 1;
     
