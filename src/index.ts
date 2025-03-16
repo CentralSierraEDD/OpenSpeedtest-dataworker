@@ -6,11 +6,14 @@ export default {
     let createQuery = `INSERT INTO data_table (indexnum) VALUES (?);`;
   
     let sqlResult = await env.DB.prepare(indexQuery).all();
+    
+    const entries = Object.entries(sqlResult);
 
-    console.log("sqlResult: ", sqlResult['indexnum']);
+    console.log("entries: ", entries);
+    console.log("sqlResult: ", sqlResult);
     console.log("sqlResult type: ", typeof sqlResult);
 
-    let { dbExport } = sqlResult['indexnum'];
+    let { dbExport } = sqlResult;
     let currentIndex = dbExport;
 
     console.log("currentIndex is: ", currentIndex);
