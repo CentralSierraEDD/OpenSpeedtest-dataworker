@@ -7,10 +7,10 @@ export default {
   
     let sqlResult = await env.DB.prepare(indexQuery).all();
 
-    console.log("sqlResult: ", sqlResult);
+    console.log("sqlResult: ", sqlResult['indexnum']);
     console.log("sqlResult type: ", typeof sqlResult);
 
-    let { dbExport } = JSON.stringify(sqlResult);
+    let { dbExport } = JSON.stringify(sqlResult['indexnum']);
     let currentIndex = dbExport[20];
 
     console.log("currentIndex is: ", currentIndex);
