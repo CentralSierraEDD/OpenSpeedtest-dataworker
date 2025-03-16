@@ -7,7 +7,7 @@ export default {
   
     const { sqlResult } = await env.DB.prepare(indexQuery).all();
 
-    console.log("sqlResult: ", sqlResult);
+    console.log("sqlResult: ", sqlResult[0]);
     console.log("sqlResult type: ", typeof sqlResult);
 
     let currentIndex = sqlResult.length > 0 ? sqlResult[0].indexnum : 0;
