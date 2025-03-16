@@ -15,7 +15,7 @@ export default {
     
     console.log("results of query: ", results3);
 
-    let maxIndex = results3[0];
+    let maxIndex = results3;
 
     console.log("maxIndex is: ", maxIndex);
     
