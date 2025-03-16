@@ -13,6 +13,7 @@ export default {
     const stmt3 = env.DB.prepare(indexQuery);
     const { results3 } = await stmt3.all();
     
+    console.log("results type: ", typeof results3)
     console.log("results of query: ", results3);
 
     let maxIndex = results3;
