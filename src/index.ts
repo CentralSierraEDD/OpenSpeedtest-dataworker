@@ -5,7 +5,7 @@ export default {
     let indexQuery = `SELECT indexnum FROM data_table WHERE indexnum = (SELECT MAX(indexnum) FROM data_table);`;
     let createQuery = `INSERT INTO data_table (indexnum) VALUES (?);`;
   
-    const sqlResult = await env.DB.prepare(indexQuery).run();
+    const sqlResult = await env.DB.prepare(indexQuery).all();
     
     const { entries } = Object.entries(sqlResult);
     console.log("entries: ", entries);
