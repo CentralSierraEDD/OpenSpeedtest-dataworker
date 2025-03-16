@@ -7,7 +7,7 @@ export default {
     let displayQuery = `SELECT * FROM data_table LIMIT 10;`;
 
     const stmt3 = env.DB.prepare(indexQuery);
-    const { results3 } = await stmt3.all();
+    const { results3 } = await JSON.stringify(stmt3);
 
     console.log("results3: ", await results3);
     console.log("results3 type: ", typeof await results3);
