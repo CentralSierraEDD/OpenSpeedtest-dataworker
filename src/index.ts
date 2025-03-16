@@ -6,14 +6,11 @@ export default {
     let createQuery = `INSERT INTO data_table (indexnum) VALUES (?);`;
     let displayQuery = `SELECT * FROM data_table LIMIT 10;`;
     
-    const stmt3 = env.DB.prepare(indexQuery);
-    const { results3 } = await stmt3.all();
+    const stmt3 = await env.DB.prepare(indexQuery);
+    let maxIndex = JSON.stringify(stmt3, null, 2);
 
-    let maxIndex = await JSON.stringify(results3, null, 2);
-    
-    await console.log("stmt3: ", stmt3);
-    await console.log("results type: ", typeof maxIndex)
-    await console.log("results of query: ", maxIndex);
+    console.log("stmt3: ", stmt3);
+    console.log("results type stmt3: ", typeof stmt3)
     
     let newIndex = maxIndex++;
     
