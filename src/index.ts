@@ -6,8 +6,8 @@ export default {
     let createQuery = `INSERT INTO user_provided_data (Test_Index) VALUES (?)`;
     let maxIndex = env.DB.prepare(indexQuery);
     let newIndex = maxIndex++;
-    const stmt = env.DB.prepare(createQuery).bind(newIndex);
-    const { results } = await stmt.all();
+    const stmt2 = env.DB.prepare(createQuery).bind(newIndex);
+    const { results } = await stmt2.all();
     const stmt = env.DB.prepare("SELECT * FROM user_provided_data LIMIT 10");
     const { results } = await stmt.all();
 
