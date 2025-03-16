@@ -1,5 +1,16 @@
 import { renderHtml } from "./renderHtml";
 
+let indexQuery = `SELECT * FROM user_provided_data WHERE Test_Index = (SELECT MAX(Test_Index) FROM user_provided_data)`;
+
+async fetch(request, env) {
+	let maxIndex = env.DB.query(indexQuery);
+	let newIndex = maxIndex++;
+	return new Response(newIndex);
+};
+
+let createQuery = `INSERT INTO user_provided_data (Test_Index) VALUES (?)`;
+env.DB.query(createQuery).bind(newIndex);
+
 export default {
   async fetch(request, env) {
     const stmt = env.DB.prepare("SELECT * FROM user_provided_data LIMIT 10");
