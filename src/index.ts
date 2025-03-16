@@ -5,12 +5,15 @@ export default {
     let indexQuery = `SELECT indexnum FROM data_table WHERE indexnum = (SELECT MAX(indexnum) FROM data_table);`;
     let createQuery = `INSERT INTO data_table (indexnum) VALUES (?);`;
   
-    const sqlResult = await env.DB.prepare(indexQuery).all();
+    const { sqlResult } = await env.DB.prepare(indexQuery).all();
 
     console.log("sqlResult: ", sqlResult);
     console.log("sqlResult type: ", typeof sqlResult);
 
-    let currentIndex = sqlResult[0].indexnum;
+    let currentIndex = sqlResult.length > 0 ? sqlResult[0].indexnum : 0;
+
+    console.log("currentIndex is: ", currentIndex);
+
     let newIndex = currentIndex + 1;
   
     console.log("newIndex is: ", newIndex);
