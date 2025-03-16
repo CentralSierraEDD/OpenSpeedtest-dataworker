@@ -8,10 +8,11 @@ export default {
     
     const stmt3 = env.DB.prepare(indexQuery);
     const { results3 } = await stmt3.all();
-    let maxIndex = JSON.stringify(results3);
 
-    console.log("results3: ", results3);
-    console.log("results type reslut3: ", typeof results3);
+    let { maxIndex } = await JSON.stringify(results3);
+
+    await console.log("results3: ", results3);
+    await console.log("results3 type: ", typeof results3);
     
     let newIndex = maxIndex + 1;
     

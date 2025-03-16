@@ -2,7 +2,7 @@ export function renderHtml(content: string) {
   return `
     <!DOCTYPE html>
     <html lang="en">
-      <title>S#031: D1 page</title>
+      <title>S#032: D1 page</title>
       <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
