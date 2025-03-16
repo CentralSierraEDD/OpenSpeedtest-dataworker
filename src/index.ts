@@ -7,12 +7,13 @@ export default {
     let displayQuery = `SELECT * FROM data_table LIMIT 10;`;
     
     const stmt3 = await env.DB.prepare(indexQuery);
-    let maxIndex = JSON.stringify(stmt3, null, 2);
+    const { results3 } = await stmt3.all();
+    let maxIndex = JSON.stringify(results3);
 
-    console.log("stmt3: ", stmt3);
-    console.log("results type stmt3: ", typeof stmt3);
+    console.log("results3: ", results3);
+    console.log("results type reslut3: ", typeof results3);
     
-    let newIndex = maxIndex++;
+    let newIndex = maxIndex + 1;
     
     console.log("newIndex is: ", newIndex);
 
