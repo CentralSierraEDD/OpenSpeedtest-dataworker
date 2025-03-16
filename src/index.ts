@@ -10,10 +10,10 @@ export default {
     const { entries } = Object.entries(sqlResult);
     console.log("entries: ", entries);
 
-    console.log("sqlResult: ", sqlResult['indexnum']);
-    console.log("sqlResult type: ", typeof sqlResult['indexnum']);
+    console.log("sqlResult: ", sqlResult);
+    console.log("sqlResult type: ", typeof sqlResult);
 
-    let currentIndex = sqlResult['indexnum'];
+    let currentIndex = sqlResult;
 
     console.log("currentIndex is: ", currentIndex);
 
@@ -21,7 +21,7 @@ export default {
   
     console.log("newIndex is: ", newIndex);
 
-    env.DB.prepare(createQuery).bind(newIndex).run();
+    await env.DB.prepare(createQuery).bind(newIndex).run();
     
     let displayQuery = `SELECT * FROM data_table LIMIT 10;`;
     const stmt = env.DB.prepare(displayQuery);
