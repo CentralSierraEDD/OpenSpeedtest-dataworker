@@ -10,7 +10,7 @@ export default {
     let maxIndex = JSON.stringify(stmt3, null, 2);
 
     console.log("stmt3: ", stmt3);
-    console.log("results type stmt3: ", typeof stmt3)
+    console.log("results type stmt3: ", typeof stmt3);
     
     let newIndex = maxIndex++;
     
