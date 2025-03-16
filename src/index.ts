@@ -10,7 +10,7 @@ export default {
     console.log("sqlResult: ", sqlResult);
     console.log("sqlResult type: ", typeof sqlResult);
 
-    let currentIndex = JSON.stringify(sqlResult.all());
+    let currentIndex = JSON.stringify(sqlResult);
 
     console.log("currentIndex is: ", currentIndex);
 
