@@ -10,7 +10,7 @@ export default {
     console.log("sqlResult: ", sqlResult);
     console.log("sqlResult type: ", typeof sqlResult);
 
-    let currentIndex = sqlResult.length > 0 ? sqlResult[0].indexnum : 0;
+    let currentIndex = sqlResult[0].indexnum;
     let newIndex = currentIndex + 1;
   
     console.log("newIndex is: ", newIndex);
