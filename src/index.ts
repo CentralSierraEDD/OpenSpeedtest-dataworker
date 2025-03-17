@@ -50,6 +50,9 @@ const dummyData = [
   ""
 ];
 
+
+
+
 export default {
   async fetch(request, env) {
     let indexQuery = `SELECT MAX(indexnum) AS maxIndex FROM data_table;`;
@@ -69,7 +72,7 @@ export default {
     while (i < 22) {
       let curRow = newIndex;
       let curField = sqlFields[i];
-      let curData = dummyData[i];
+      let curData = dummyData[i].toFixed(0);
 
       await env.DB.prepare(`UPDATE data_table SET ${curField} = ? WHERE indexnum = ?;`).bind(curData, curRow).run();
 
