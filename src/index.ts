@@ -72,7 +72,7 @@ export default {
     while (i < 22) {
       let curRow = newIndex;
       let curField = sqlFields[i];
-      let curData = dummyData[i].toFixed(0);
+      let curData = dummyData[i];
 
       await env.DB.prepare(`UPDATE data_table SET ${curField} = ? WHERE indexnum = ?;`).bind(curData, curRow).run();
 
