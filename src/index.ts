@@ -76,7 +76,7 @@ export default {
 
       await env.DB.prepare(`UPDATE data_table SET ${curField} = ? WHERE indexnum = ?;`).bind(curData, curRow).run();
 
-      console.log("Iteration:", i);
+      console.log("Iteration:", i, " , Row:", curRow, " , Field:", curField, " , Data:", curData);
       i++;
     }
 
