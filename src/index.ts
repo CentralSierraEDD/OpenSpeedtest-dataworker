@@ -71,7 +71,7 @@ export default {
       let curRow = 3;
       let curField = "testnum";
       let curData = 0;
-      let setData = curField + " = " curData;
+      let setData = curField + " = " + curData;
 
       await env.DB.prepare(recordQuery).bind(setData, curRow).run();
 
