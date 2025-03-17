@@ -66,7 +66,7 @@ export default {
     await env.DB.prepare(createQuery).bind(newIndex).run();
     
     let i: number = 0;
-    while (i < 23) {
+    while (i < 22) {
       let curRow = newIndex;
       let curField = sqlFields[i];
       let curData = dummyData[i];
