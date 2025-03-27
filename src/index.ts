@@ -59,7 +59,7 @@ async function handleRequest(request, env) {
   console.log('Received data:', requestData);
 
   // Execute your code here using the received data
-  inboundData = { requestData };
+  inboundData = requestData;
   let indexQuery = `SELECT MAX(indexnum) AS maxIndex FROM data_table;`;
   let createQuery = `INSERT INTO data_table (indexnum) VALUES (?);`;
 
