@@ -50,7 +50,7 @@ var inboundData = [
   ""
 ];
 
-addEventListener('fetch', event => {
+env.addEventListener('fetch', event => {
   event.respondWith(handleRequest(event));
 });
 
