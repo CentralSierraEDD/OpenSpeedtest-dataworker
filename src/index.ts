@@ -54,7 +54,7 @@ env.DB.addEventListener('fetch', event => {
   event.respondWith(handleRequest(event));
 });
 
-async function handleRequest(request, env) {
+async function handleRequest(request, env, DB) {
   const requestData = await event.request.json();
   console.log('Received data:', requestData);
 
