@@ -1,60 +1,60 @@
 //import { renderHtml } from "./renderHtml";
 
-const sqlFields = [
-  "testnum",
-  "entity",
-  "streetnum",
-  "street",
-  "unitapt",
-  "city",
-  "state_US",
-  "zip",
-  "firstname",
-  "lastname",
-  "email",
-  "ISP",
-  "plandown",
-  "planup",
-  "testdown",
-  "testup",
-  "testlatency",
-  "testjitter",
-  "detectedISP",
-  "detectedregion",
-  "geolocation",
-  "censusblock"
-]
-
-var inboundData = [
-  "0",
-  "individual",
-  "10893",
-  "Martin Terrace Ct",
-  "",
-  "Sonora",
-  "CA",
-  "95370",
-  "Trevor",
-  "Gregg",
-  "Trevor@TrevorAmesGregg.com",
-  "Comcast",
-  "300",
-  "30",
-  "278",
-  "24",
-  "30",
-  "5",
-  "Comcast",
-  "CA",
-  "37.99606, -120.40737",
-  ""
-];
-
-env.DB.addEventListener('fetch', event => {
+addEventListener('fetch', event => {
   event.respondWith(handleRequest(event));
 });
 
 async function handleRequest(request, env, DB) {
+  const sqlFields = [
+    "testnum",
+    "entity",
+    "streetnum",
+    "street",
+    "unitapt",
+    "city",
+    "state_US",
+    "zip",
+    "firstname",
+    "lastname",
+    "email",
+    "ISP",
+    "plandown",
+    "planup",
+    "testdown",
+    "testup",
+    "testlatency",
+    "testjitter",
+    "detectedISP",
+    "detectedregion",
+    "geolocation",
+    "censusblock"
+  ]
+  
+  var inboundData = [
+    "0",
+    "individual",
+    "10893",
+    "Martin Terrace Ct",
+    "",
+    "Sonora",
+    "CA",
+    "95370",
+    "Trevor",
+    "Gregg",
+    "Trevor@TrevorAmesGregg.com",
+    "Comcast",
+    "300",
+    "30",
+    "278",
+    "24",
+    "30",
+    "5",
+    "Comcast",
+    "CA",
+    "37.99606, -120.40737",
+    ""
+  ];
+
   const requestData = await event.request.json();
   console.log('Received data:', requestData);
 
