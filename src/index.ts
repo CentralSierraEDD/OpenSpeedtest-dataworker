@@ -1,10 +1,10 @@
 export default {
-  async fetch(request, evn, context) {
-    return handleRequest(request, evn, context);
+  async fetch(request, env, context) {
+    return handleRequest(request, env, context);
   }
 };
 
-async function handleRequest(request, event, env) {
+async function handleRequest(request, env, event) {
   const sqlFields = [
     "testnum",
     "entity",
