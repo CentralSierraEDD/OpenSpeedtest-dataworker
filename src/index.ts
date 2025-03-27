@@ -50,7 +50,7 @@ var inboundData = [
   ""
 ];
 
-env.addEventListener('fetch', event => {
+env.DB.addEventListener('fetch', event => {
   event.respondWith(handleRequest(event));
 });
 
