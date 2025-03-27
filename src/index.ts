@@ -1,8 +1,8 @@
-//import { renderHtml } from "./renderHtml";
-
-addEventListener('fetch', event => {
-  event.respondWith(handleRequest(event.request, event.env));
-});
+export default {
+  async fetch(request, evn, context) {
+    return handleRequest(request, evn, context);
+  }
+};
 
 async function handleRequest(request, event, env) {
   const sqlFields = [
@@ -65,11 +65,9 @@ async function handleRequest(request, event, env) {
     let createQuery = `INSERT INTO data_table (indexnum) VALUES (?);`;
 
     const { results: indexResults } = await env.DB.prepare(indexQuery).all();
-    
     let currentIndex = indexResults[0]?.maxIndex ?? -1;
-    console.log("Current Index:", currentIndex);
-    
     let newIndex = currentIndex + 1;
+    console.log("Current Index:", currentIndex);
     console.log("New Index:", newIndex);
 
     await env.DB.prepare(createQuery).bind(newIndex).run();
@@ -78,15 +76,14 @@ async function handleRequest(request, event, env) {
       let curRow = newIndex;
       let curField = sqlFields[i];
       let curData = inboundData[i];
-
       await env.DB.prepare(`UPDATE data_table SET ${curField} = ? WHERE indexnum = ?;`).bind(curData, curRow).run();
-
       console.log("Iteration:", i, " , Row:", curRow, " , Field:", curField, " , Data:", curData);
-      i++;
     }
-  }
-  catch (error) {
-  console.error("Error:", error);
-  return new Response("Internal Server Error", { status: 500 });
+
+    return new Response("Data processed successfully", { status: 200 });
+
+  } catch (error) {
+    console.error("Error:", error);
+    return new Response("Internal Server Error", { status: 500 });
   }
 }
