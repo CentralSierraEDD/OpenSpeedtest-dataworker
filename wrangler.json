@@ -2,7 +2,7 @@
   "services": [
     {
       "binding": "dataWorker",
-      "service": "index.ts"
+      "service": "index.js"
     }
   ],
   "compatibility_date": "2024-11-01",
