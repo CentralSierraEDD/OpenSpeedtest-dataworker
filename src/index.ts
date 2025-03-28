@@ -95,5 +95,6 @@ async function addData(env, payload) {
     let curData = inboundData[i];
     await env.DB.prepare(`UPDATE data_table SET ${curField} = ? WHERE indexnum = ?;`).bind(curData, curRow).run();
     console.log("Iteration:", i, " , Row:", curRow, " , Field:", curField, " , Data:", curData);
-  };
+  }
+  return { success: true, index: newIndex };
 };
