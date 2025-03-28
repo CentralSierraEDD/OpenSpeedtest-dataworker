@@ -2,13 +2,14 @@ import { WorkerEntrypoint } from "cloudflare:workers";
 
 export default class WorkflowsService extends WorkerEntrypoint {
     // Currently, entrypoints without a named handler are not supported
-  async fetch(request, env) {
-      try {
+  async fetch(request, env, ctx) {
+    try {
       console.log("env:", env);
       const payload = await request.json();
       console.log("received payload");
   
-      const response = await addData(env, payload);
+      await addData(env, payload);
+
       return new Response(JSON.stringify({ success: true, message: "Data added successfully" }), {
         headers: { "Content-Type": "application/json" },
       });
@@ -17,14 +18,13 @@ export default class WorkflowsService extends WorkerEntrypoint {
       return new Response(JSON.stringify({ success: false, error: error.message }), {
         status: 500,
         headers: { "Content-Type": "application/json" },
-      });
-    }
-
-  return new Response("Send a POST request with data.", { status: 400 });
+        });
+      }
+    return new Response("Send a request with data.", { status: 400 });
   }
 };
 
-async function addData(env:any, payload) {
+async function addData(env, payload) {
   const sqlFields = [
     "testnum",
     "entity",
