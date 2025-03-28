@@ -1,4 +1,5 @@
 import { WorkerEntrypoint } from "cloudflare:workers";
+import { saveTestDataBEADChallenge } from 'updateSaveTestDataBEADChallenge';
 
 export default class WorkflowsService extends WorkerEntrypoint {
     // Currently, entrypoints without a named handler are not supported
