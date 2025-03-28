@@ -1,4 +1,10 @@
 {
+  "services": [
+    {
+      "binding": "WORKFLOW_SERVICE",
+      "service": "dataWorker"
+    }
+  ],
   "compatibility_date": "2024-11-01",
   "main": "src/index.ts",
   "name": "csedd-dataworker",
