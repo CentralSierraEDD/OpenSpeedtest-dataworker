@@ -1,3 +1,5 @@
+import { WorkerEntrypoint } from "cloudflare:workers";
+
 export default class WorkflowsService extends WorkerEntrypoint {
     // Currently, entrypoints without a named handler are not supported
   async fetch(request, env, ctx) {

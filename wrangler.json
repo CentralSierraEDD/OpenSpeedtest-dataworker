@@ -1,9 +1,5 @@
 {
   "compatibility_date": "2024-11-01",
-  "main": "src/index.ts",
-  "name": "csedd-dataworker",
-  "type": "worker",
-  "workers_dev": false,
   "upload_source_maps": true,
   "d1_databases": [
     {
@@ -16,8 +12,11 @@
     {
       "binding": "dataWorker",
       "service": "csedd-dataworker",
-      "script": "index"
-    }
+      "main": "src/index.ts",
+      "script": "index",
+      "type": "worker",
+      "workers_dev": false
+     }
   ],
   "observability": {
     "enabled": true
