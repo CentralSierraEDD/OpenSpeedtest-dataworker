@@ -12,7 +12,7 @@
   "services": [
     {
       "binding": "dataWorker",
-      "service": "csedd-dataworker",
+      "name": "csedd-dataworker",
       "script": "index",
       "type": "worker",
       "workers_dev": false
