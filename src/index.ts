@@ -1,24 +1,28 @@
 import { WorkerEntrypoint } from "cloudflare:workers";
-var payload = "";
 
 export default class WorkflowsService extends WorkerEntrypoint {
-  // Currently, entrypoints without a named handler are not supported
+    // Currently, entrypoints without a named handler are not supported
   async fetch(request, env) {
-    console.log("env:", env);
-    return new Response(null, { status: 404 });
-  }
+      try {
+      console.log("env:", env);
+      const payload = await request.json();
+      console.log("received payload");
+  
+      const response = await addData(env, payload);
+      return new Response(JSON.stringify({ success: true, message: "Data added successfully" }), {
+        headers: { "Content-Type": "application/json" },
+      });
+      } catch (error) {
+      console.error("error handling request:", error);
+      return new Response(JSON.stringify({ success: false, error: error.message }), {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
 
-  async createInstance(payload, env) {
-    let instance = await this.env.dataWorker.create({
-      params: payload,
-    });
-
-    return Response.json({
-      id: instance.id,
-      details: await instance.status(),
-    });
+  return new Response("Send a POST request with data.", { status: 400 });
   }
-}
+};
 
 async function addData(env:any, payload) {
   const sqlFields = [
