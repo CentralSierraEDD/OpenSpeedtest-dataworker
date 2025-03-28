@@ -3,7 +3,7 @@ var payload = "";
 
 export default class WorkflowsService extends WorkerEntrypoint {
   // Currently, entrypoints without a named handler are not supported
-  async fetch(env: any) {
+  async fetch(request, env) {
     console.log("env:", env);
     return new Response(null, { status: 404 });
   }
