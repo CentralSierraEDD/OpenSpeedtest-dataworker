@@ -7,7 +7,7 @@ export default class WorkflowsService extends WorkerEntrypoint {
     return new Response(null, { status: 404 });
   }
 
-  async createInstance(payload) {
+  async createInstance(payload, env) {
     let instance = await this.env.dataWorker.create({
       params: payload,
     });
