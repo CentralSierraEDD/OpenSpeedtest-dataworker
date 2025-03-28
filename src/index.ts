@@ -1,26 +1,31 @@
-import { WorkerEntrypoint } from "cloudflare:workers";
 import { saveTestDataBEADChallenge } from 'updateSaveTestDataBEADChallenge';
 
-export default class WorkflowsService extends WorkerEntrypoint {
-    // Currently, entrypoints without a named handler are not supported
+export default {
   async fetch(request, env, ctx) {
     try {
-      console.log("env:", env);
-      const payload = await request.json();
-      console.log("received payload");
-  
-      await addData(env, payload);
+      console.log("Received request");
 
-      return new Response(JSON.stringify({ success: true, message: "Data added successfully" }), {
+      if (request.method !== "POST") {
+        return new Response(JSON.stringify({ error: "Only POST method allowed" }), { status: 405 });
+      }
+
+      const payload = await request.json();
+      console.log("Received payload:", payload);
+
+      const dbResponse = await addData(env, payload);
+
+      return new Response(JSON.stringify({ success: true, data: dbResponse }), {
         headers: { "Content-Type": "application/json" },
+        status: 200,
       });
-      } catch (error) {
-      console.error("error handling request:", error);
+
+    } catch (error) {
+      console.error("Error in Worker:", error);
       return new Response(JSON.stringify({ success: false, error: error.message }), {
         status: 500,
         headers: { "Content-Type": "application/json" },
-        });
-      }
+      });
+    }
   }
 };
 
