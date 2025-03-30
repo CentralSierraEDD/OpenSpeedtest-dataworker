@@ -3,8 +3,25 @@ export default {
     try {
       console.log("Received request");
 
+      if (request.method === "OPTIONS") {
+        return new Response(null, {
+          status: 204,
+          headers: {
+            "Access-Control-Allow-Origin": "https://trevor-openspeedtest.pages.dev",
+            "Access-Control-Allow-Methods": "POST, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type",
+          },
+        });
+      }
+
       if (request.method !== "POST") {
-        return new Response(JSON.stringify({ error: "Only POST method allowed" }), { status: 405 });
+        return new Response(JSON.stringify({ error: "Only POST method allowed" }), { 
+          status: 405,
+          headers: {
+            "Content-Type": "application/json", 
+            "Access-Control-Allow-Origin": "https://trevor-openspeedtest.pages.dev" 
+          }
+        });
       }
 
       const payload = await request.json();
@@ -13,15 +30,21 @@ export default {
       const dbResponse = await addData(env, payload);
 
       return new Response(JSON.stringify({ success: true, data: dbResponse }), {
-        headers: { "Content-Type": "application/json" },
         status: 200,
+        headers: { 
+          "Content-Type": "application/json", 
+          "Access-Control-Allow-Origin": "https://trevor-openspeedtest.pages.dev" 
+        },
       });
 
     } catch (error) {
       console.error("Error in Worker:", error);
       return new Response(JSON.stringify({ success: false, error: error.message }), {
         status: 500,
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json", 
+          "Access-Control-Allow-Origin": "https://trevor-openspeedtest.pages.dev" 
+        },
       });
     }
     return new Response(result, {
