@@ -80,7 +80,8 @@ async function addData(env, payload) {
     "detectedISP",
     "detectedregion",
     "geolocation",
-    "censusblock"
+    "censusblock",
+    "FullAddress"
   ]
   const sqlFieldsNum = sqlFields.length; //number of sql fields in records, for iterations
 
@@ -106,15 +107,13 @@ async function addData(env, payload) {
     "detected ISP",
     "geolocation",
     "37.99606, -120.40737",
-    "censusdata"
+    "censusdata",
+    "fulladdress"
   ];
   
-  //will probably need to convert payload to useable format
-  const requestData = payload;
+  console.log('Received data:', payload); //LOGGING for the input data
 
-  console.log('Received data:', requestData); //LOGGING input data
-
-  var inboundData = requestData;
+  var inboundData = payload;
   let indexQuery = `SELECT MAX(indexnum) AS maxIndex FROM data_table;`;
   let createQuery = `INSERT INTO data_table (indexnum) VALUES (?);`;
 
