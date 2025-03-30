@@ -81,7 +81,8 @@ async function addData(env, payload) {
     "detectedregion",
     "geolocation",
     "censusblock",
-    "FullAddress"
+    "FullAddress",
+    "orgname"
   ]
   const sqlFieldsNum = sqlFields.length; //number of sql fields in records, for iterations
 
@@ -108,7 +109,8 @@ async function addData(env, payload) {
     "geolocation",
     "37.99606, -120.40737",
     "censusdata",
-    "fulladdress"
+    "fulladdress",
+    "orgname"
   ];
   
   console.log('Received data:', payload); //LOGGING for the input data
