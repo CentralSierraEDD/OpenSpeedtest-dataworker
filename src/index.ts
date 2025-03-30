@@ -1,5 +1,5 @@
 export default {
-  async fetch(request, env, ctx) {
+  async fetch(request, env, context) {
     try {
       console.log("Received request");
 
@@ -52,6 +52,8 @@ async function addData(env, payload) {
     "geolocation",
     "censusblock"
   ]
+  const sqlFieldsNum = sqlFields.length; //number of sql fields in records, for iterations
+
   var inboundData = [
     "0",
     "individual",
@@ -76,9 +78,11 @@ async function addData(env, payload) {
     "37.99606, -120.40737",
     "censusdata"
   ];
-  const sqlFieldsNum = sqlFields.length;
+  
+  //will probably need to convert payload to useable format
   const requestData = payload;
-  console.log('Received data:', requestData);
+
+  console.log('Received data:', requestData); //LOGGING input data
 
   var inboundData = requestData;
   let indexQuery = `SELECT MAX(indexnum) AS maxIndex FROM data_table;`;
