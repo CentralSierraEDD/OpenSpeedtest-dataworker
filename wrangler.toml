@@ -1,12 +1,19 @@
 
+
+name = "csedd-dataworker"
+type = "javascript"
+account_id = "672d2bf9aea3df86bf6cc201c11327c1"
+workers_dev = true
+compatibility_date = "2024-11-01"
+
+[build]
+upload.format = "modules"
+
 [[services]]
 binding = "dataWorker"
 service = "csedd-dataworker"
-script = "index"
-type = "worker"
+script = "ui"
 main = "src/index.ts"
-workers_dev = false
-compatibility_date = "2024-11-01"
 
 [[d1_databases]]
 binding = "DB"

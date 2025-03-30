@@ -1,5 +1,3 @@
-import { saveTestDataBEADChallenge } from 'updateSaveTestDataBEADChallenge';
-
 export default {
   async fetch(request, env, ctx) {
     try {
