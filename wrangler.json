@@ -15,7 +15,7 @@
       "binding": "dataWorker",
       "service": "csedd-dataworker",
       "name": "csedd-dataworker",
-      "script": "index",
+      "script": "ui",
       "type": "worker",
       "workers_dev": false
      }

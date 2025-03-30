@@ -1,7 +1,7 @@
 
 
 name = "csedd-dataworker"
-type = "javascript"
+type = "worker"
 account_id = "672d2bf9aea3df86bf6cc201c11327c1"
 workers_dev = true
 compatibility_date = "2024-11-01"
