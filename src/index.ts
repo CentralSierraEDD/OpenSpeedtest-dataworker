@@ -113,7 +113,7 @@ async function addData(env, payload) {
   
   console.log('Received data:', payload); //LOGGING for the input data
 
-  var inboundData = payload;
+  inboundData = payload;
   let indexQuery = `SELECT MAX(indexnum) AS maxIndex FROM data_table;`;
   let createQuery = `INSERT INTO data_table (indexnum) VALUES (?);`;
 
