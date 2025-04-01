@@ -138,4 +138,3 @@ async function addData(env, payload) {
   }
   return { success: true, index: newIndex };
 };
-
