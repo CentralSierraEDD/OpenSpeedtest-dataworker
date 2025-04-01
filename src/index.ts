@@ -50,7 +50,7 @@ export default {
     return new Response(result, {
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'https://trevor-openspeedtest.pages.dev', // or a specific origin like 'https://your-pages-site.com'
+        'Access-Control-Allow-Origin': 'https://trevor-openspeedtest.pages.dev', 
         "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
         "Access-Control-Allow-Headers": "Content-Type",      },
     });
