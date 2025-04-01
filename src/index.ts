@@ -135,8 +135,8 @@ async function addData(env, payload) {
   //Query the max testnum where address matches, increment testnum
   const testnumQuery = `SELECT MAX(testnum) AS maxTestnum FROM data_table WHERE FullAddress = ?;`;
   const { results: testnumResults } = await env.DB.prepare(testnumQuery).bind(addressToMatch).all();
-  let currentMaxTestnum = testnumResults[0]?.maxTestnum ?? 0;
-  let newTestnum = currentMaxTestnum++;
+  let currentMaxTestnum = Number(testnumResults[0]?.maxTestnum ?? 0);
+  let newTestnum = currentMaxTestnum + 1;
 
   //Pass back to inboundData before the loop
   inboundData[0] = newTestnum.toString();  // index 0 = "testnum"
