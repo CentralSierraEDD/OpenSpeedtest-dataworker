@@ -82,7 +82,7 @@ async function addData(env, payload) {
     "geolocation",
     "censusblock",
     "FullAddress",
-    "orgname"
+    "orgname",
   ]
   const sqlFieldsNum = sqlFields.length; //number of sql fields in records, for iterations
 
@@ -110,7 +110,7 @@ async function addData(env, payload) {
     "37.99606, -120.40737",
     "censusdata",
     "fulladdress",
-    "orgname"
+    "orgname",
   ];
   
   console.log('Received data:', payload); //LOGGING for the input data
@@ -118,21 +118,23 @@ async function addData(env, payload) {
   inboundData = payload;
   let indexQuery = `SELECT MAX(indexnum) AS maxIndex FROM data_table;`;
   let createQuery = `INSERT INTO data_table (indexnum) VALUES (?);`;
+  let timeQuery = `UPDATE data_table SET timestamp = datetime('now', 'localtime') WHERE indexnum = ?;`;
 
   const { results: indexResults } = await env.DB.prepare(indexQuery).all();
   let currentIndex = indexResults[0]?.maxIndex ?? -1;
   let newIndex = currentIndex + 1;
-  console.log("Current Index:", currentIndex);
-  console.log("New Index:", newIndex);
+  //console.log("Current Index:", currentIndex);
+  //console.log("New Index:", newIndex);
 
   await env.DB.prepare(createQuery).bind(newIndex).run();
+  await env.DB.prepare(timeQuery).bind(newIndex).run();
 
   for (let i = 0; i < sqlFieldsNum; i++) {
     let curRow = newIndex;
     let curField = sqlFields[i];
     let curData = inboundData[i];
     await env.DB.prepare(`UPDATE data_table SET ${curField} = ? WHERE indexnum = ?;`).bind(curData, curRow).run();
-    console.log("Iteration:", i, " , Row:", curRow, " , Field:", curField, " , Data:", curData);
+    //console.log("Iteration:", i, " , Row:", curRow, " , Field:", curField, " , Data:", curData);
   }
   return { success: true, index: newIndex };
 };
