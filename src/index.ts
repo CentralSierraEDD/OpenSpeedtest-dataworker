@@ -118,7 +118,7 @@ async function addData(env, payload) {
   inboundData = payload;
   let indexQuery = `SELECT MAX(indexnum) AS maxIndex FROM data_table;`;
   let createQuery = `INSERT INTO data_table (indexnum) VALUES (?);`;
-  let timeQuery = `UPDATE data_table SET timestamp = datetime('now', 'localtime') WHERE indexnum = ?;`;
+  let timeQuery = `UPDATE data_table SET timestamp = datetime('now', 'utc') WHERE indexnum = ?;`;
 
   const { results: indexResults } = await env.DB.prepare(indexQuery).all();
   let currentIndex = indexResults[0]?.maxIndex ?? -1;
