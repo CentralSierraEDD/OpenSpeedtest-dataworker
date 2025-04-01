@@ -8,7 +8,7 @@ script = "dataworker.js"
 main = "src/index.ts"
 account_id = "672d2bf9aea3df86bf6cc201c11327c1"
 workers_dev = true
-compatibility_date = "2024-11-01"
+compatibility_date = "2025-04-01"
 
 services = [
     {binding = "dataWorker", service = "csedd-dataworker" }
