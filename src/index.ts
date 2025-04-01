@@ -129,6 +129,18 @@ async function addData(env, payload) {
   await env.DB.prepare(createQuery).bind(newIndex).run();
   await env.DB.prepare(timeQuery).bind(newIndex).run();
 
+  //Extract the address field from inboundData, index 22 = "FullAddress"
+  const addressToMatch = inboundData[22];
+
+  //Query the max testnum where address matches, increment testnum
+  const testnumQuery = `SELECT MAX(testnum) AS maxTestnum FROM data_table WHERE FullAddress = ?;`;
+  const { results: testnumResults } = await env.DB.prepare(testnumQuery).bind(addressToMatch).all();
+  let currentMaxTestnum = testnumResults[0]?.maxTestnum ?? 0;
+  let newTestnum = currentMaxTestnum + 1;
+
+  //Pass back to inboundData before the loop
+  inboundData[0] = newTestnum.toString();  // index 0 = "testnum"
+
   for (let i = 0; i < sqlFieldsNum; i++) {
     let curRow = newIndex;
     let curField = sqlFields[i];
