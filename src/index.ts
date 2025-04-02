@@ -83,34 +83,36 @@ async function addData(env, payload) {
     "censusblock",
     "FullAddress",
     "orgname",
+    "agreeToShare"
   ]
   const sqlFieldsNum = sqlFields.length; //number of sql fields in records, for iterations
 
   var inboundData = [
     "0",
     "individual",
-    "streetnum",
-    "streetname",
-    "unitnum",
+    "5555",
+    "street name",
+    "unit 1",
     "city",
     "state",
-    "zip",
+    "95370",
     "firstname",
     "lastname",
     "email@domain.com",
-    "reported ISP",
+    "reportedISP",
     "300",
     "30",
     "278",
     "24",
     "30",
     "5",
-    "detected ISP",
-    "geolocation",
-    "37.99606, -120.40737",
+    "detectedISP",
+    "geolocated",
+    "37.99606 -130.40737",
     "censusdata",
-    "fulladdress",
+    "full address, well formatted, USA",
     "orgname",
+    "0"
   ];
   
   console.log('Received data:', payload); //LOGGING for the input data
