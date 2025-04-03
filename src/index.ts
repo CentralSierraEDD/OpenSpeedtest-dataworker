@@ -123,8 +123,9 @@ async function addData(env, payload) {
 
   //call santize function on input, returning
   inboundData = payload.map((value, index) => {
+    const value = payload[field];
     const clean = sanitizeInput(value);
-    checkSanitize(clean, value, sqlFields[index] || `field_${index}`);
+    checkSanitize(clean, value, field);
     return clean;
   });
   
