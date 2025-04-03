@@ -121,11 +121,18 @@ async function addData(env, payload) {
 
   let sanitizeCount = 0;
 
+  function checkSanitize(sanitized, input, fieldName = "unknown") {
+    if (sanitized != input) {
+      sanitizeCount++;
+    }
+    return sanitizeCount;
+  };
+
   //call santize function on input, returning
-  inboundData = payload.map((value, index) => {
-    const value = payload[field];
-    const clean = sanitizeInput(value);
-    checkSanitize(clean, value, field);
+  inboundData = sqlFields.map((field, index) => {
+    const value = payload[field];                // Grab from object
+    const clean = sanitizeInput(value);          // Sanitize
+    checkSanitize(clean, value, field);          // Count if altered
     return clean;
   });
   
@@ -185,10 +192,3 @@ function sanitizeInput(input) {
 
   return sanitized.trim();
 }
-
-function checkSanitize(sanitized, input, fieldName = "unknown") {
-  if (sanitized != input) {
-    sanitizeCount++;
-  }
-  return sanitizeCount;
-};
