@@ -83,7 +83,8 @@ async function addData(env, payload) {
     "censusblock",
     "FullAddress",
     "orgname",
-    "agreeToShare"
+    "agreeToShare",
+    "sanitizeCount"
   ]
   const sqlFieldsNum = sqlFields.length; //number of sql fields in records, for iterations
 
@@ -112,12 +113,23 @@ async function addData(env, payload) {
     "censusdata",
     "full address, well formatted, USA",
     "orgname",
+    "0",
     "0"
   ];
   
   console.log('Received data:', payload); //LOGGING for the input data
 
-  inboundData = payload;
+  let sanitizeCount = 0;
+
+  //call santize function on input, returning
+  inboundData = payload.map((value, index) => {
+    const clean = sanitizeInput(value);
+    checkSanitize(clean, value, sqlFields[index] || `field_${index}`);
+    return clean;
+  });
+  
+  inboundData.push(sanitizeCount); //Adds count to end of array
+  
   let indexQuery = `SELECT MAX(indexnum) AS maxIndex FROM data_table;`;
   let createQuery = `INSERT INTO data_table (indexnum) VALUES (?);`;
   let timeQuery = `UPDATE data_table SET timestamp = datetime('now', 'utc') WHERE indexnum = ?;`;
@@ -151,4 +163,31 @@ async function addData(env, payload) {
     //console.log("Iteration:", i, " , Row:", curRow, " , Field:", curField, " , Data:", curData);
   }
   return { success: true, index: newIndex };
+};
+
+function sanitizeInput(input) {
+  if (typeof input !== 'string') return input;
+
+  let sanitized = input.replace(/https?:\/\/\S+/gi, '');   // Remove URLs
+  sanitized = sanitized.replace(/['";]+/g, '');   // Remove quotes and semicolons
+  // Remove control characters and emojis
+  sanitized = sanitized.replace(/[\u0000-\u001F\u007F-\u009F\uD800-\uDFFF\u2600-\u27BF]/g, '');
+  const sqlKeywords = [
+    "SELECT", "INSERT", "UPDATE", "DELETE", "DROP", "ALTER", "EXEC",
+    "FROM", "WHERE", "DATABASE", "CREATE"
+  ];   // Remove common SQL keywords (case-insensitive, whole words)
+
+  sqlKeywords.forEach(keyword => {
+    const regex = new RegExp(`\\b${keyword}\\b`, 'gi');
+    sanitized = sanitized.replace(regex, '');
+  });
+
+  return sanitized.trim();
+}
+
+function checkSanitize(sanitized, input, fieldName = "unknown") {
+  if (sanitized != input) {
+    sanitizeCount++;
+  }
+  return sanitizeCount;
 };
