@@ -129,10 +129,9 @@ async function addData(env, payload) {
   };
 
   //call santize function on input, returning
-  inboundData = sqlFields.map((field, index) => {
-    const value = payload[field];                // Grab from object
-    const clean = sanitizeInput(value);          // Sanitize
-    checkSanitize(clean, value, field);          // Count if altered
+  inboundData = payload.map((value, index) => {
+    const clean = sanitizeInput(value);
+    checkSanitize(clean, value, sqlFields[index] || `field_${index}`);
     return clean;
   });
   
