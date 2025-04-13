@@ -246,13 +246,5 @@ function sanitizeInput(input) {
     sanitized = sanitized.replace(regex, '');
   });
 
-  return new Response(JSON.stringify({ error: "Not Found" }), {
-    status: 404,
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "https://trevor-openspeedtest.pages.dev"
-    }
-  });
-
   return sanitized.trim();
 }
