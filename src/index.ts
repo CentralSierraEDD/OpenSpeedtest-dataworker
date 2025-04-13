@@ -49,6 +49,8 @@ export default {
       }
 
       const payload = await request.json();
+      const { now } = await env.DB.prepare(`SELECT datetime('now', 'utc') AS now`).first();
+
       const orderedPayload = [
         "0",
         payload.orgtype,
@@ -76,7 +78,7 @@ export default {
         payload.orgname,
         payload.consent,
         "0",
-        "timestamp",
+        now,
         payload.ip ?? ""
       ];
 
@@ -187,7 +189,7 @@ async function addData(env, orderedPayload) {
     return sanitizeCount;
   };
 
-  //call santize function on input, returning
+  //call sanitize function on input, returning
   inboundData = orderedPayload.map((value, index) => {
     const safeValue = sanitizeInput(value ?? '');
     checkSanitize(safeValue, value, sqlFields[index] || `field_${index}`);
@@ -207,7 +209,6 @@ async function addData(env, orderedPayload) {
   //console.log("New Index:", newIndex);
 
   await env.DB.prepare(createQuery).bind(newIndex).run();
-  await env.DB.prepare(timeQuery).bind(newIndex).run();
 
   //Extract the address field from inboundData, index 22 = "FullAddress"
   const addressToMatch = inboundData[22];
