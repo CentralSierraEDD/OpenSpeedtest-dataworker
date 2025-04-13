@@ -2,6 +2,7 @@ export default {
   async fetch(request, env, context) {
     try {
       console.log("Received request");
+      const url = new URL(request.url);
       const cf = request.cf || {};
       const clientIP = request.headers.get('cf-connecting-ip');
       const clientISP = cf.asOrganization || 'Unknown ISP';
@@ -11,13 +12,12 @@ export default {
 
       console.log('Telemetry:', { clientIP, clientISP, clientRegion, clientCountry, clientCity });
 
-
       if (request.method === "OPTIONS") {
         return new Response(null, {
           status: 204,
           headers: {
             "Access-Control-Allow-Origin": "https://trevor-openspeedtest.pages.dev",
-            "Access-Control-Allow-Methods": "POST, OPTIONS",
+            "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
             "Access-Control-Allow-Headers": "Content-Type",
           },
         });
@@ -226,6 +226,6 @@ function sanitizeInput(input) {
       "Access-Control-Allow-Origin": "https://trevor-openspeedtest.pages.dev"
     }
   });
-  
+
   return sanitized.trim();
 }
