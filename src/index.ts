@@ -23,8 +23,6 @@ export default {
         });
       }
 
-      const url = new URL(request.url);
-
       if (request.method === "GET" && url.pathname === "/telemetry") {
         return new Response(JSON.stringify({
           success: true,
