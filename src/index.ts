@@ -50,8 +50,7 @@ export default {
 
       const payload = await request.json();
       const orderedPayload = [
-        "",
-        "",
+        "0",
         payload.orgtype,
         payload.streetnumber,
         payload.streetname,
@@ -76,9 +75,9 @@ export default {
         payload.address,
         payload.orgname,
         payload.consent,
-        "",
-        "",
-        payload.ip
+        "0",
+        "timestamp",
+        payload.ip ?? ""
       ];
 
       console.log("Received payload:", orderedPayload);
