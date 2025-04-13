@@ -2,6 +2,15 @@ export default {
   async fetch(request, env, context) {
     try {
       console.log("Received request");
+      const cf = request.cf || {};
+      const clientIP = request.headers.get('cf-connecting-ip');
+      const clientISP = cf.asOrganization || 'Unknown ISP';
+      const clientRegion = cf.region || 'Unknown Region';
+      const clientCountry = cf.country || 'Unknown Country';
+      const clientCity = cf.city || 'Unknown City';
+
+      console.log('Telemetry:', { clientIP, clientISP, clientRegion, clientCountry, clientCity });
+
 
       if (request.method === "OPTIONS") {
         return new Response(null, {
@@ -11,6 +20,21 @@ export default {
             "Access-Control-Allow-Methods": "POST, OPTIONS",
             "Access-Control-Allow-Headers": "Content-Type",
           },
+        });
+      }
+
+      if (request.method === "GET") {
+        return new Response(JSON.stringify({
+          success: true,
+          isp: clientISP,
+          region: `${clientCity}, ${clientRegion}, ${clientCountry}`,
+          ip: clientIP,
+        }), {
+          status: 200,
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "https://trevor-openspeedtest.pages.dev"
+          }
         });
       }
 
@@ -84,7 +108,9 @@ async function addData(env, payload) {
     "FullAddress",
     "orgname",
     "agreeToShare",
-    "sanitizeCount"
+    "sanitizeCount",
+    "timestamp",
+    "IP"
   ]
   const sqlFieldsNum = sqlFields.length; //number of sql fields in records, for iterations
 
@@ -113,8 +139,10 @@ async function addData(env, payload) {
     "censusdata",
     "full address, well formatted, USA",
     "orgname",
+    "agree",
     "0",
-    "0"
+    "timestamp",
+    "0.0.0.0"
   ];
   
   console.log('Received data:', payload); //LOGGING for the input data
