@@ -187,9 +187,9 @@ async function addData(env, orderedPayload) {
 
   //call santize function on input, returning
   inboundData = orderedPayload.map((value, index) => {
-    const clean = sanitizeInput(value);
-    checkSanitize(clean, value, sqlFields[index] || `field_${index}`);
-    return clean;
+    const safeValue = sanitizeInput(value ?? '');
+    checkSanitize(safeValue, value, sqlFields[index] || `field_${index}`);
+    return safeValue;
   });
   
   inboundData.push(sanitizeCount); //Adds count to end of array
