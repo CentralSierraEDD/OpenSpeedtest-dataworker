@@ -50,7 +50,7 @@ export default {
 
       const payload = await request.json();
       const orderedPayload = [
-        payload.zero,
+        "0",
         payload.orgtype,
         payload.streetnumber,
         payload.streetname,
@@ -70,12 +70,14 @@ export default {
         payload.Jitter,
         payload.detectedISP,
         payload.region,
-        payload.ip,
         payload.geo,
         payload.censusblock,
         payload.address,
         payload.orgname,
-        payload.consent
+        payload.consent,
+        "0",
+        "0:00",
+        payload.ip
       ];
 
       console.log("Received payload:", orderedPayload);
@@ -115,7 +117,7 @@ async function addData(env, orderedPayload) {
     "testnum",
     "entity",
     "streetnum",
-    "street",
+    "streetname",
     "unitapt",
     "city",
     "state_US",
