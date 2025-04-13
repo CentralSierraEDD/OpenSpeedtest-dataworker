@@ -49,9 +49,38 @@ export default {
       }
 
       const payload = await request.json();
-      console.log("Received payload:", payload);
+      const orderedPayload = [
+        payload.zero,
+        payload.orgtype,
+        payload.streetnumber,
+        payload.streetname,
+        payload.unitnumber,
+        payload.city,
+        payload.state,
+        payload.zip,
+        payload.firstname,
+        payload.lastname,
+        payload.email,
+        payload.ISP,
+        payload.PlanDown,
+        payload.PlanUp,
+        payload.DL,
+        payload.UL,
+        payload.Latency,
+        payload.Jitter,
+        payload.detectedISP,
+        payload.region,
+        payload.ip,
+        payload.geo,
+        payload.censusblock,
+        payload.address,
+        payload.orgname,
+        payload.consent
+      ];
 
-      const dbResponse = await addData(env, payload);
+      console.log("Received payload:", orderedPayload);
+
+      const dbResponse = await addData(env, orderedPayload);
 
       return new Response(JSON.stringify({ success: true, data: dbResponse }), {
         status: 200,
@@ -81,7 +110,7 @@ export default {
   }
 };
 
-async function addData(env, payload) {
+async function addData(env, orderedPayload) {
   const sqlFields = [
     "testnum",
     "entity",
@@ -145,7 +174,7 @@ async function addData(env, payload) {
     "0.0.0.0"
   ];
   
-  console.log('Received data:', payload); //LOGGING for the input data
+  console.log('Received data:', orderedPayload); //LOGGING for the input data
 
   let sanitizeCount = 0;
 
@@ -157,7 +186,7 @@ async function addData(env, payload) {
   };
 
   //call santize function on input, returning
-  inboundData = payload.map((value, index) => {
+  inboundData = orderedPayload.map((value, index) => {
     const clean = sanitizeInput(value);
     checkSanitize(clean, value, sqlFields[index] || `field_${index}`);
     return clean;
