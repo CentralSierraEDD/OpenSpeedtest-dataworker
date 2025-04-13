@@ -54,7 +54,7 @@ export default {
         payload.orgtype,
         payload.streetnumber,
         payload.streetname,
-        payload.unitnumber,
+        payload.unitnumber ?? "",
         payload.city,
         payload.state,
         payload.zip,
