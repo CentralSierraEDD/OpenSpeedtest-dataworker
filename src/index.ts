@@ -79,7 +79,7 @@ export default {
         payload.consent,
         "0",
         now,
-        payload.ip ?? ""
+        clientIP ?? ""
       ];
 
       console.log("Received payload:", orderedPayload);
