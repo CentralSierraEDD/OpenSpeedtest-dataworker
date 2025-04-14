@@ -16,7 +16,7 @@ export default {
         return new Response(null, {
           status: 204,
           headers: {
-            "Access-Control-Allow-Origin": "https://trevor-openspeedtest.pages.dev",
+            "Access-Control-Allow-Origin": "https://speedtest.csedd.org",
             "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
             "Access-Control-Allow-Headers": "Content-Type",
           },
@@ -33,7 +33,7 @@ export default {
           status: 200,
           headers: {
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "https://trevor-openspeedtest.pages.dev"
+            "Access-Control-Allow-Origin": "https://speedtest.csedd.org"
           }
         });
       }
@@ -43,7 +43,7 @@ export default {
           status: 405,
           headers: {
             "Content-Type": "application/json", 
-            "Access-Control-Allow-Origin": "https://trevor-openspeedtest.pages.dev" 
+            "Access-Control-Allow-Origin": "https://speedtest.csedd.org" 
           }
         });
       }
@@ -90,7 +90,7 @@ export default {
         status: 200,
         headers: { 
           "Content-Type": "application/json", 
-          "Access-Control-Allow-Origin": "https://trevor-openspeedtest.pages.dev" 
+          "Access-Control-Allow-Origin": "https://speedtest.csedd.org" 
         },
       });
 
@@ -100,14 +100,14 @@ export default {
         status: 500,
         headers: { 
           "Content-Type": "application/json", 
-          "Access-Control-Allow-Origin": "https://trevor-openspeedtest.pages.dev" 
+          "Access-Control-Allow-Origin": "https://speedtest.csedd.org" 
         },
       });
     }
     return new Response(result, {
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'https://trevor-openspeedtest.pages.dev', 
+        'Access-Control-Allow-Origin': 'https://speedtest.csedd.org', 
         "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
         "Access-Control-Allow-Headers": "Content-Type",      },
     });
